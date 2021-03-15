@@ -4,16 +4,25 @@
 \alias{plot_var_1D}
 \title{Barplot of a fingerprint}
 \usage{
-plot_var_1D(rgcca_res, comp = 1, n_mark = 100,
-  i_block = length(rgcca_res$a), type = "cor", collapse = FALSE,
-  title = NULL, colors = NULL, ...)
+plot_var_1D(
+  rgcca_res,
+  comp = 1,
+  n_mark = 30,
+  i_block = length(rgcca_res$a),
+  type = "cor",
+  collapse = FALSE,
+  title = NULL,
+  colors = NULL,
+  ...
+)
 }
 \arguments{
-\item{rgcca_res}{A RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
+\item{rgcca_res}{A fitted RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
 
 \item{comp}{An integer giving the index of the analysis components}
 
-\item{n_mark}{An integer giving the number of top variables to select}
+\item{n_mark}{The number of top variables to display in the correlation
+circle}
 
 \item{i_block}{An integer giving the index of a list of blocks}
 
@@ -30,7 +39,7 @@ or "weight" for the weight of the RGCCA}
 \item{...}{Further graphical parameters (see plot2D)}
 }
 \description{
-Barplot of the higher outer weight vectors for a component of a block 
+Barplot of the higher outer weight vectors for a component of a block
 (by default, the superblock or the last one) analysed by R/SGCCA
 }
 \examples{
@@ -39,7 +48,7 @@ for (i in seq(3))
 row.names(weights[[i]]) <- paste0(letters[i],
      letters[seq(NROW(weights[[i]]))])
 weights[[4]] = Reduce(rbind, weights)
-rgcca_out = list(a = weights, call = list(type="rgcca", ncomp = rep(2,4)))
+rgcca_out = list(a = weights, call = list(method="rgcca", ncomp = rep(2,4)))
 names(rgcca_out$a) = LETTERS[seq(4)]
 rgcca_out$call$blocks = lapply(rgcca_out$a, t)
 rgcca_out$call$superblock = TRUE

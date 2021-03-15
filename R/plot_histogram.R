@@ -17,7 +17,7 @@ plot_histogram <- function(
     cex_sub = 12 * cex,
     cex_axis = 10 * cex
 ) {
-    
+
     for (i in c("cex", "cex_main", "cex_sub", "cex_axis"))
         check_integer(i, get(i))
 
@@ -34,7 +34,7 @@ plot_histogram <- function(
         width <- 1
 
    if (NROW(df) < 3)
-       mar <- 50
+       mar <- 0
    else if (NROW(df) <= 15)
        mar <- round(3 / NROW(df) * 50)
    else
@@ -54,7 +54,7 @@ plot_histogram <- function(
     }
 
     p <- p + geom_bar(stat = "identity", width = width) +
-        coord_flip() + 
+        coord_flip() +
         labs(title = title,  x = "", y = "") +
         theme_classic() +
         theme_perso(cex, cex_main, cex_sub) +

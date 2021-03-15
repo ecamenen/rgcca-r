@@ -16,23 +16,23 @@ Maintainer: \packageMaintainer{RGCCA}
 }
 
 \keyword{ package }
-\seealso{\link{rgcca},\link{bootstrap},\link{rgcca_predict},\link{rgcca_crossvalidation},\link{rgcca_permutation},\link{get_patternNA}, \link{whichNAmethod},\link{naEvolution}
+\seealso{\link{rgcca},\link{bootstrap},\link{rgcca_cv},\link{rgcca_permutation}
 }
 \examples{
 # Create the dataset
 data(Russett)
 blocks = list(
-    agriculture = Russett[, seq(3)], 
+    agriculture = Russett[, seq(3)],
     industry = Russett[, 4:5],
     politic = Russett[, 6:11]
 )
 
 # Tune the model to find the best sparsity coefficients (all the blocs are connected together)
-perm = rgcca_permutation(blocks, n_cores = 1, par_type = "sparsity", n_run = 10)
+perm = rgcca_permutation(blocks, n_cores = 1, par_type = "sparsity", n_perms = 10)
 print(perm)
 plot(perm)
 
-res_sgcca = rgcca(blocks, type = "sgcca", sparsity = perm$bestpenalties)
+res_sgcca = rgcca(blocks, method = "sgcca", sparsity = perm$bestpenalties)
 plot(res_sgcca, type = "network")
 plot(res_sgcca, type = "ave")
 

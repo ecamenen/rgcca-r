@@ -4,14 +4,22 @@
 \alias{plot_histogram}
 \title{Histogram settings}
 \usage{
-plot_histogram(p, df, title = "", group = NA, colors = NULL,
-  cex = 1, cex_main = 14 * cex, cex_sub = 12 * cex, cex_axis = 10 *
-  cex)
+plot_histogram(
+  p,
+  df,
+  title = "",
+  group = NA,
+  colors = NULL,
+  cex = 1,
+  cex_main = 14 * cex,
+  cex_sub = 12 * cex,
+  cex_axis = 10 * cex
+)
 }
 \arguments{
 \item{p}{A ggplot object}
 
-\item{df}{A dataframe}
+\item{df}{A data.frame}
 
 \item{title}{A character giving the title of the plot}
 

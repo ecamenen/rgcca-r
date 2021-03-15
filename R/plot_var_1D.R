@@ -1,6 +1,6 @@
 #' Barplot of a fingerprint
 #'
-#' Barplot of the higher outer weight vectors for a component of a block 
+#' Barplot of the higher outer weight vectors for a component of a block
 #' (by default, the superblock or the last one) analysed by R/SGCCA
 #'
 #' @inheritParams plot_var_2D
@@ -16,7 +16,7 @@
 #' row.names(weights[[i]]) <- paste0(letters[i],
 #'      letters[seq(NROW(weights[[i]]))])
 #' weights[[4]] = Reduce(rbind, weights)
-#' rgcca_out = list(a = weights, call = list(type="rgcca", ncomp = rep(2,4)))
+#' rgcca_out = list(a = weights, call = list(method="rgcca", ncomp = rep(2,4)))
 #' names(rgcca_out$a) = LETTERS[seq(4)]
 #' rgcca_out$call$blocks = lapply(rgcca_out$a, t)
 #' rgcca_out$call$superblock = TRUE
@@ -45,7 +45,7 @@ plot_var_1D <- function(
 
     check_colors(colors)
     if(rgcca_res$call$superblock==FALSE){collapse=FALSE}
-    
+
     df <- get_ctr2(
         rgcca_res = rgcca_res,
         compx = comp,
@@ -58,7 +58,7 @@ plot_var_1D <- function(
     )
     resp <- df$resp
 
-    if (i_block < length(rgcca_res$a) || tolower(rgcca_res$call$type) == "pca")
+    if (i_block < length(rgcca_res$a) || tolower(rgcca_res$call$method) == "pca")
         rgcca_res$call$superblock <- FALSE
      J <- names(rgcca_res$a)
 

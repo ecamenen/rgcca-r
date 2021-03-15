@@ -4,16 +4,32 @@
 \alias{plot2D}
 \title{Plot RGCCA components in a bi-dimensional space}
 \usage{
-plot2D(rgcca_res, df, title = "", group = 1, name_group = "Response",
-  compx = 1, compy = 2, i_block = 1, p = NULL, text = TRUE,
-  i_block_y = i_block, colors = NULL, collapse = FALSE,
-  no_overlap = FALSE, cex = 1, cex_main = 14 * cex, cex_sub = 12 *
-  cex, cex_point = 3 * cex, cex_lab = 10 * cex)
+plot2D(
+  rgcca_res,
+  df,
+  title = "",
+  group = 1,
+  name_group = "Response",
+  compx = 1,
+  compy = 2,
+  i_block = 1,
+  p = NULL,
+  text = TRUE,
+  i_block_y = i_block,
+  colors = NULL,
+  collapse = FALSE,
+  no_overlap = FALSE,
+  cex = 1,
+  cex_main = 14 * cex,
+  cex_sub = 12 * cex,
+  cex_point = 3 * cex,
+  cex_lab = 10 * cex
+)
 }
 \arguments{
-\item{rgcca_res}{A RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
+\item{rgcca_res}{A fitted RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
 
-\item{df}{A dataframe}
+\item{df}{A data.frame}
 
 \item{title}{A character giving the title of the plot}
 

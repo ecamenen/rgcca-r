@@ -1,7 +1,7 @@
 #' Plot permutation in 2D
-#' 
+#'
 #' Plot permutation in 2D
-#' 
+#'
 #' @inheritParams plot_var_2D
 #' @inheritParams plot2D
 #' @inheritParams get_bootstrap
@@ -13,10 +13,10 @@
 #' @importFrom ggplot2 geom_point
 #' @importFrom ggplot2 geom_line
 #' @importFrom ggplot2 geom_hline
-#' @importFrom ggplot2 geom_vline 
+#' @importFrom ggplot2 geom_vline
 #' @importFrom stats aggregate
 plot_permut_2D <- function(
-    perm, 
+    perm,
     type = "crit",
     cex = 1,
     title = NULL,
@@ -37,11 +37,19 @@ plot_permut_2D <- function(
     check_colors(colors)
     if (length(colors) < 2)
         colors <- rep(colors, 2)
+    if(perm$call$method%in%c("sgcca","spls"))
+    {
+        crit_title="SGCCA criterion"
+    }
+    else
+    {
+        crit_title="RGCCA criterion"
+    }
 
     switch(
         type,
         "zstat" =  y_title <- "Z-score",
-        "crit" = y_title <- "RGCCA criterion"
+        "crit" = y_title <-  crit_title
     )
 
     check_ncol(list(perm$zstat), 1)
@@ -65,17 +73,17 @@ plot_permut_2D <- function(
 
     if (is.null(title))
         title <- paste0(
-                "Permutation scores (",perm$call$n_run, " runs) \n Best parameters : ",
+                "Permutation scores (",perm$call$n_perms, " runs) \n Best parameters : ",
                 paste(round(perm$penalties[best,], 2), collapse = ", ")
             )
     else
         title <- paste0(title, collapse = " ")
 
-    p <- ggplot(data = df, mapping = aes(x = df[, 1], y = df[, 2], ymin = 0)) + 
+    p <- ggplot(data = df, mapping = aes(x = df[, 1], y = df[, 2], ymin = 0)) +
         theme_classic() +
         geom_line(size = 0.5) +
         labs(
-            title = title, 
+            title = title,
             x = "Combinations",
             y = y_title
         ) +
@@ -106,7 +114,7 @@ plot_permut_2D <- function(
             dft <- rbind(dft,dfi)
         }
         dft <- as.data.frame(dft)
-     
+
         if (bars == "points")
             p <- p + geom_point(data = dft,aes(x = dft[,1], y = dft[,2]), colour = colors[2], size = 0.8)
          if (bars == "sd") {
@@ -133,13 +141,13 @@ plot_permut_2D <- function(
             p <- p+ geom_point(data=tab2,aes(x=tab2[,1],y=tab2[,3]),colour=colors[2])
             p <- p + geom_segment(data=dat,aes(x=x,y=y,xend=xend,yend=yend),colour=colors[2],size=0.5)
         }
-   
+
 
     }
 
     p <- p + geom_line(data = df, mapping = aes(x = df[, 1], y = df[, 2])) +
-        scale_x_continuous(breaks = 1:nrow(df), labels = rownames(df)) + 
-        theme(plot.title = element_text(vjust=5), plot.margin = margin(5, 0, 0, 0, "mm")) + 
+        scale_x_continuous(breaks = 1:nrow(df), labels = rownames(df)) +
+        theme(plot.title = element_text(vjust=5), plot.margin = margin(5, 0, 0, 0, "mm")) +
         geom_point(
             mapping = aes(
                 x = best,

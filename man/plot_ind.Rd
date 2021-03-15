@@ -4,15 +4,29 @@
 \alias{plot_ind}
 \title{Plot the two components of a RGCCA}
 \usage{
-plot_ind(rgcca_res, resp = rep(1, NROW(rgcca_res$Y[[1]])), compx = 1,
-  compy = 2, i_block = length(rgcca_res$Y), text = TRUE,
-  i_block_y = i_block, response_name = "Response",
-  no_overlap = FALSE, predicted = NULL,
-  title = paste0(names(rgcca_res$call$blocks)[i_block],
-  ": Sample space"), legend = TRUE, ...)
+plot_ind(
+  rgcca_res,
+  resp = rep(1, NROW(rgcca_res$Y[[1]])),
+  compx = 1,
+  compy = 2,
+  i_block = length(rgcca_res$Y),
+  text = TRUE,
+  i_block_y = i_block,
+  response_name = "Response",
+  no_overlap = FALSE,
+  predicted = NULL,
+  title = paste0(names(rgcca_res$call$blocks)[i_block], ": Sample space"),
+  legend = TRUE,
+  cex = 1,
+  cex_main = 14 * cex,
+  cex_sub = 12 * cex,
+  cex_point = 3 * cex,
+  cex_lab = 10 * cex,
+  ...
+)
 }
 \arguments{
-\item{rgcca_res}{A RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
+\item{rgcca_res}{A fitted RGCCA object (see  \code{\link[RGCCA]{rgcca}})}
 
 \item{resp}{A vector of characters corresponding either to a qualitative
 variable with levels or a continuous variable}
@@ -41,6 +55,16 @@ one, different from the one used in i_block)}
 
 \item{legend}{A logical value indicatif if the legend should be plotted}
 
+\item{cex}{An integer for the size of the plot parameters}
+
+\item{cex_main}{An integer for the size of the title}
+
+\item{cex_sub}{An integer for the size of the subtitle}
+
+\item{cex_point}{An integer for the size of the points or the text in the plot}
+
+\item{cex_lab}{An integer for the size of the axis titles}
+
 \item{...}{Further graphical parameters (see plot2D functions)}
 }
 \description{
@@ -52,12 +76,12 @@ coord = lapply(seq(3),
 AVE_X = lapply(seq(3), function(x) runif(2))
 for (i in 1:length(coord))
 row.names(coord[[i]]) = seq(15)
-rgcca_out = list(Y = coord, AVE = list(AVE_X = AVE_X), 
+rgcca_out = list(Y = coord, AVE = list(AVE_X = AVE_X),
 call = list(blocks = coord, ncomp = rep(2,3))) # TODO
 # Using a superblock
 resp = as.matrix(rep(LETTERS[seq(3)], each = 5))
 row.names(resp) = seq(15)
-rgcca_out$call$type="rgcca"
+rgcca_out$call$method="rgcca"
 class(rgcca_out) = "rgcca"
 plot_ind(rgcca_out, resp)
 # Using the first block
