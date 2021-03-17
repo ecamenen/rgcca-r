@@ -1044,10 +1044,14 @@ server <- function(input, output, session) {
                     method = analysis_type
                 )
             )
-            if (tolower(analysis_type) %in% c("sgcca", "spca", "spls"))
+            if (tolower(analysis_type) %in% c("sgcca", "spca", "spls")) {
                 func[["sparsity"]] <- tau
-            else
+                func$par_type <- "sparsity"
+            } else {
                 func[["tau"]] <- tau
+                func$par_type <- "tau"
+            }
+                
             showWarn(eval(as.call(func)))
         },
         .GlobalEnv)
@@ -1743,7 +1747,9 @@ server <- function(input, output, session) {
         
         if (!is.null(perm)) {
 
-            s_perm <- summary.perm(perm)
+            tab_res <- cbind(perm$crit, perm$means, perm$sds, perm$zstat, perm$pvals)
+            colnames(tab_res) <- c("RGCCA crit", "Perm. crit", "S.D.", "Z", "P-value")
+            s_perm <- round(cbind(perm$penalties, tab_res), 3)
 
             observeEvent(input$permutation_t_save, {
                 write.table(s_perm, "summary_permutation.txt", sep = "\t", row.names = FALSE)

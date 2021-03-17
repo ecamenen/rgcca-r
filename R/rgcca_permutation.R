@@ -254,7 +254,7 @@ rgcca_permutation <- function(blocks, par_type, par_value = NULL,
     match.arg(par_type, c("tau", "sparsity"))
     min_spars <- NULL
     
-    if (tolower(type) %in% c("sgcca", "spca", "spls")) {
+    if (tolower(method) %in% c("sgcca", "spca", "spls")) {
         par_type <- "sparsity"
     } else
         par_type <- "tau"
