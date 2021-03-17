@@ -943,7 +943,7 @@ server <- function(input, output, session) {
                             scale_block = FALSE,
                             init = input$init,
                             bias = TRUE,
-                            type = analysis_type
+                            method = analysis_type
                         )
                    )
                    if (tolower(analysis_type) %in% c("sgcca", "spca", "spls"))
@@ -973,7 +973,7 @@ server <- function(input, output, session) {
             func <- quote(
                 rgcca_cv( 
                     blocks,
-                    type = analysis_type,
+                    method = analysis_type,
                     response = response,
                     validation = input$val,
                     k = input$kfold,
@@ -1030,7 +1030,7 @@ server <- function(input, output, session) {
             func <- quote(
                 rgcca_permutation(
                     blocks_without_superb,
-                    n_run = input$nperm,
+                    n_perms = input$nperm,
                     connection = connection,
                     response = input$names_block_response,
                     superblock = (!is.null(input$supervised) &&
@@ -1041,7 +1041,7 @@ server <- function(input, output, session) {
                     ncomp = getNcomp(),
                     init = input$init,
                     bias = TRUE,
-                    type = analysis_type
+                    method = analysis_type
                 )
             )
             if (tolower(analysis_type) %in% c("sgcca", "spca", "spls"))

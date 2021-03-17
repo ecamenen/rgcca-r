@@ -390,7 +390,7 @@ stop_rgcca <- function(
 # arguments
 opt <- list(
     separator = 1,
-    type = "rgcca",
+    method = "rgcca",
     ncomp = 2,
     penalty = 1,
     scheme = 2,
@@ -451,7 +451,7 @@ tryCatch({
             ncomp = opt$ncomp,
             scheme = opt$scheme,
             scale = opt$scale,
-            type = opt$type
+            method = opt$type
         )
     )
     if (tolower(opt$type) %in% c("sgcca", "spca", "spls")) {
